@@ -1,4 +1,3 @@
-sql-server
-==========
+Outer Joins Against A Date Range
 
-Collection of SQL code 
+See article: http://digitalcolony.com/sql/outer-joins-against-a-date-range/
