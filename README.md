@@ -88,3 +88,11 @@ Last Words
 One last piece of advice is to get your datetime range correct first before attempting to OUTER JOIN with it. Only once you know the dbo.udfDateTimes is returning the datetimes you need for the query should you proceed with your OUTER JOIN.
 
 Although the Northwind database deals with orders, another great use for these functions is when looking for missing data. In those cases where you need to seek out the datetimes where no data is present, add a HAVING clause set to zero.
+
+-- G: Days in July 1996 with no orders 
+SELECT dtime AS OrderDate, COUNT(R.orderID) AS OrderCount
+FROM dbo.udfDateTimes ('7/1/1996', '7/31/1996',1,'day') DT 
+
+LEFT OUTER JOIN Orders R ON DT.dtime = R.OrderDate
+GROUP BY dtime
+HAVING COUNT(R.orderID) = 0
