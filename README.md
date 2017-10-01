@@ -1,6 +1,6 @@
 # Outer Joins Against A Date Range
 
-This article is written for SQL Server, which supports user-defined functions and OUTER JOINS.  All examples come from the Northwind database which is part of the default installation of SQL Server.
+This article is written for SQL Server, which supports user-defined functions and OUTER JOINS.  All examples come from the [Northwind database](https://www.microsoft.com/en-us/download/details.aspx?id=23654) which is part of the default installation of SQL Server 2000.
 
 In SQL an OUTER JOIN is where you want to return all the elements in a table regardless of whether they exist in the second table.  The most common case for using an OUTER JOIN is when you need a COUNT or SUM value even when the aggregate function returns a zero.  Before we get to the heart of this article, let me use two queries to demonstrate the power of a basic OUTER JOIN.
 
@@ -63,7 +63,7 @@ ORDER BY N.number
 Using dbo.udfNumbers
 ```
 
-The dbo.udfNumbers user-defined function returns a TABLE of numbers. It is available for download at the end of this article. The upper range limit is 999,999. If you need larger numbers, modifying the function should be fairly easy.
+The **dbo.udfNumbers** user-defined function returns a TABLE of numbers. It is available for download at the end of this article. The upper range limit is 999,999. If you need larger numbers, modifying the function should be fairly easy.
 
 ```sql
 -- E: Usage dbo.udfNumbers(low range,high range) 
@@ -71,9 +71,9 @@ The dbo.udfNumbers user-defined function returns a TABLE of numbers. It is avail
 SELECT number FROM dbo.udfNumbers(6,12)
 ```
 
-I use dbo.udfNumbers for those quick queries where I just need a range of digits. 
+I use **dbo.udfNumbers** for those quick queries where I just need a range of digits. 
 
-For most date-based reporting I use the far more powerful dbo.udfDateTimes. This user-defined function uses the digit logic in dbo.udfNumbers along with SQL Server’s date and time function to return ranges of datetime. 
+For most date-based reporting I use the far more powerful **dbo.udfDateTimes**. This user-defined function uses the digit logic in **dbo.udfNumbers** along with SQL Server’s date and time function to return ranges of datetime. 
 
 Query C was based upon Day of the Week, so there were only 7 possible values. What if the sales manager asked for a day by day breakdown of orders for July? That would turn into one long and ugly SQL statement. The dbo.udfDateTimes function creates the date range need for that OUTER JOIN without the long and ugly SQL.
 
@@ -86,7 +86,7 @@ GROUP BY dtime
 Using dbo.udfDateTimes
 ```
 
-Like dbo.udfNumbers, the user-defined function dbo.udfDateTimes returns a TABLE. 
+Like **dbo.udfNumbers**, the user-defined function **dbo.udfDateTimes** returns a TABLE. 
 
 1. The first parameter is start date. 
 2. The second is end date. 
@@ -95,7 +95,7 @@ Like dbo.udfNumbers, the user-defined function dbo.udfDateTimes returns a TABLE.
 
 ## Last Words
 
-One last piece of advice is to get your datetime range query correct first before attempting to OUTER JOIN with it. Only once you know the dbo.udfDateTimes is returning the datetimes you need for the query should you proceed with your OUTER JOIN.
+One last piece of advice is to get your datetime range query correct first before attempting to OUTER JOIN with it. Only once you know the **dbo.udfDateTimes** is returning the datetimes you need for the query should you proceed with your OUTER JOIN.
 
 Although the Northwind database deals with orders, another great use for these functions is when looking for missing data. In those cases where you need to seek out the datetimes where no data is present, add a HAVING clause set to zero.
 
