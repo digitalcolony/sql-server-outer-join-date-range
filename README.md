@@ -60,7 +60,6 @@ LEFT OUTER JOIN Orders R ON N.number = DATEPART(dw,R.OrderDate)
 AND R.OrderDate BETWEEN '7/1/1996' AND '8/1/1996' 
 GROUP BY DATENAME(dw,N.number), N.Number
 ORDER BY N.number
-Using dbo.udfNumbers
 ```
 
 The **dbo.udfNumbers** user-defined function returns a TABLE of numbers. It is available for download at the end of this article. The upper range limit is 999,999. If you need larger numbers, modifying the function should be fairly easy.
