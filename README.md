@@ -75,7 +75,7 @@ I use **dbo.udfNumbers** for those quick queries where I just need a range of di
 
 For most date-based reporting I use the far more powerful **dbo.udfDateTimes**. This user-defined function uses the digit logic in **dbo.udfNumbers** along with SQL Server’s date and time function to return ranges of datetime. 
 
-Query C was based upon Day of the Week, so there were only 7 possible values. What if the sales manager asked for a day by day breakdown of orders for July? That would turn into one long and ugly SQL statement. The dbo.udfDateTimes function creates the date range need for that OUTER JOIN without the long and ugly SQL.
+Query C was based upon Day of the Week, so there were only 7 possible values. What if the sales manager asked for a day by day breakdown of orders for July? That would turn into one long and ugly SQL statement. The **dbo.udfDateTimes** function creates the date range need for that OUTER JOIN without the long and ugly SQL.
 
 ```sql
 -- F: dbo.udfDateTimes day interval for July 1996 
@@ -83,7 +83,6 @@ SELECT dtime AS OrderDate, COUNT(R.orderID) AS OrderCount
 FROM dbo.udfDateTimes ('7/1/1996', '7/31/1996',1,'day') DT 
 LEFT OUTER JOIN Orders R ON DT.dtime = R.OrderDate
 GROUP BY dtime
-Using dbo.udfDateTimes
 ```
 
 Like **dbo.udfNumbers**, the user-defined function **dbo.udfDateTimes** returns a TABLE. 
