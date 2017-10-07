@@ -30,11 +30,11 @@ But how can you perform an OUTER JOIN against a range of dates? Three ways come 
 
 1. Create a TABLE of dates (or digits) using a SQL statement. This could be a temporary or permanent table.
 
-2. Get verbose with your SQL and write long CASE statements.
+1. Get verbose with your SQL and write long CASE statements.
 
-3. Use the 2 user-defined functions I’m providing to you in this article.
+1. Use the 2 user-defined functions I’m providing to you in this article.
 
-The problem with #1 is now you’re executing multiple statements to handle one query. You are creating a TABLE, perform the INSERT and ultimately dropping the TABLE. At this point you’ll consider writing a stored procedure to accomplish the task. All for a single query. Too much work. 
+The problem with #1 is now you’re executing multiple statements to handle one query. You are creating a TABLE, perform the INSERT and ultimately dropping the TABLE. At this point you’ll consider writing a stored procedure to accomplish the task. All for a single query. Too much work.
 
 The problem with #2 is your SQL can get very long and hard to read and the data is returned more like an Access PIVOT TABLE.
 
@@ -105,3 +105,4 @@ LEFT OUTER JOIN Orders R ON DT.dtime = R.OrderDate
 GROUP BY dtime
 HAVING COUNT(R.orderID) = 0
 ```
+_created: 2004_
